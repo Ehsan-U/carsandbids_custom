@@ -1,0 +1,19 @@
+1650894316519	geckodriver	INFO	Listening on 127.0.0.1:38615
+1650894316531	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "59451" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilec1bmy4"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1650894317458	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilec1bmy4/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:59451/devtools/browser/1fad28b8-dfa1-4c7e-87b0-f4743f648853
+1650894319473	Marionette	INFO	Listening on port 46871
+Read port: 46871
+1650894319564	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1650894319569	RemoteAgent	INFO	Proxy settings initialised: {"proxyType":"manual","httpProxy":"127.0.0.1:39957","sslProxy":"127.0.0.1:39957"}
+1650894324692	Marionette	INFO	Stopped listening on port 46871
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+JavaScript error: chrome://remote/content/marionette/cert.js, line 55: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
