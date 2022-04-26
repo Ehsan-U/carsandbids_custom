@@ -85,14 +85,11 @@ class Cars():
     # parsing each car page
     def get_page(self,lock,url):
         driver = webdriver.Chrome(executable_path="/home/lubuntu/custom_car/chromedriver",options=self.ch_options,seleniumwire_options=self.wireoptions)
-        driver.get(url)
         data = {}
-        # p = sync_playwright().start()
-        # browser = p.chromium.launch(headless=True)
-        # page = browser.new_page()
         try:
+            driver.get(url)
             element = WebDriverWait(driver,10).until(EC.presence_of_element_located((By.CLASS_NAME,"quick-facts")))
-        except Exception:
+        except (KeyError,Exception):
             # print('retrying')
             driver.close()
             self.get_page(lock,url)
@@ -180,7 +177,7 @@ class Cars():
                             car = f"https://carsandbids.com/auctions/{key}/{value}" 
                             self.current_listings.put(car)
                             # self.current_listings.add(car)
-                            self.con.print(f"Total urls >>[bold] {self.total}", f"Loaded urls >> [bold] {self.current_listings.qsize()}")
+                        self.con.print(f"Total urls >>[bold] {self.total}", f"Loaded urls >> [bold] {self.current_listings.qsize()}")
             except Exception:
                 driver.close()
                 self.new_cars(url)
@@ -231,10 +228,7 @@ class Cars():
             self.wb.save("Cars.xlsx")
             self.con.print("[+] File Saved")
         else:
-            if self.counter==100:
-                self.run_new(lock,True)
-            else:
-                self.run_new(lock,False)
+            self.run_new(lock,False)
     
     # start threads for past listings
     def run_past(self,lock,load=True):
@@ -274,8 +268,8 @@ lock = threading.Lock()
 c = Cars("https://carsandbids.com")
 args = c.argss()
 if args.get("mode") == "past":
-    c.con.print("[+ bold ] Staring crawler for past listings..")
+    c.con.print("[bold ][+] Staring crawler for past listings..")
     c.run_past(lock)
 else:
-    c.con.print("[default][bold] Staring crawler for current listings..")
+    c.con.print("[bold][+] Staring crawler for current listings..")
     c.run_new(lock)
