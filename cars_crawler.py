@@ -31,7 +31,6 @@ class Cars():
         self.not_required = ['seller','body style','seller type','drivetrain']
         self.current_listings = queue.Queue()
         self.newcars = set()
-        # self.current_listings = set()
         self.con = Console()
         self.once = True
         self.counter = 0
@@ -49,16 +48,6 @@ class Cars():
         }
         }
 
-    # def parse(self,response):
-    #     soup = BeautifulSoup(response,'html.parser')
-    #     links = soup.find_all("a",attrs={"class":"hero"})
-    #     for link in links:
-    #         # if len(link['class']) == 1:
-    #         url = urljoin(self.base,str(link['href']))
-    #         print(url)
-    #         self.newcars.add(url)
-    #         self.current_listings.put(url)
-
     # extracting urls for current listings
     def new_cars(self,url):
         driver = webdriver.Chrome(executable_path="/home/lubuntu/custom_car/chromedriver",options=self.ch_options,seleniumwire_options=self.wireoptions)
@@ -66,7 +55,6 @@ class Cars():
         try:
             driver.get(url)
             element = WebDriverWait(driver,10).until(EC.presence_of_element_located((By.CLASS_NAME,"paginator")))
-            # element = WebDriverWait(driver,10).until(EC.element_to_be_clickable((By.CLASS_NAME, 'btn btn-lg btn-primary with-paging')))
         except Exception:
             driver.close()
             self.new_cars(url)
@@ -220,6 +208,7 @@ class Cars():
                 values = list(data.values())
                 self.Cars.append(values)
 
+    # start threads for current listings
     def run_new(self,lock,load=True):
         if load:
             self.new_cars("https://carsandbids.com/")
@@ -247,6 +236,7 @@ class Cars():
             else:
                 self.run_new(lock,False)
     
+    # start threads for past listings
     def run_past(self,lock,load=True):
         if load:
             self.past_cars("https://carsandbids.com/past-auctions/")
@@ -279,6 +269,7 @@ class Cars():
         values = args.parse_args()
         value = vars(values)
         return value
+
 lock = threading.Lock()
 c = Cars("https://carsandbids.com")
 args = c.argss()
