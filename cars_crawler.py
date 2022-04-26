@@ -87,9 +87,6 @@ class Cars():
         driver = webdriver.Chrome(executable_path="/home/lubuntu/custom_car/chromedriver",options=self.ch_options,seleniumwire_options=self.wireoptions)
         driver.get(url)
         data = {}
-        # p = sync_playwright().start()
-        # browser = p.chromium.launch(headless=True)
-        # page = browser.new_page()
         try:
             element = WebDriverWait(driver,10).until(EC.presence_of_element_located((By.CLASS_NAME,"quick-facts")))
         except Exception:
